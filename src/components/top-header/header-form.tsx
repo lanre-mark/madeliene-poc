@@ -6,10 +6,12 @@ import './header-form.css';
 
 const HeaderForm: React.FunctionComponent<any> = (
   { 
-    data = [], 
+    data = [],
+    onSelect, 
   }: 
   { 
     data: any[], 
+    onSelect: (srch: string) => void, //React.Dispatch<React.SetStateAction<{}>>
   }
 ) => {
 
@@ -29,7 +31,7 @@ const HeaderForm: React.FunctionComponent<any> = (
         </label>
         <div className='search-component'>
           Search:
-            <Autocomplete data={data} />
+            <Autocomplete data={data}  onSelect={onSelect} />
         </div>
       </form>
     </div>

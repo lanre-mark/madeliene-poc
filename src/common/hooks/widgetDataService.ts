@@ -11,6 +11,28 @@ const useWidgetDataService = () => {
   const [error, setError] = useState<Error | undefined>(() => undefined);
   const [parts, setParts] = useState<IWidget[]>(() => []);
 
+  /**
+   * perform filtering
+   * @param filterBy string to filter main data with
+   */
+  const performFilter = (filterBy: string): void => {
+    if (result.status === 'loaded') {
+      setStatus('loading');
+      const filteredParts = result.parts.filter((prts: IWidget): boolean => {
+        return prts.name.toLowerCase().includes(filterBy.toLowerCase());
+      })
+      setParts(filteredParts);
+      setStatus('loaded');
+    }
+  }
+  /**
+   * Reset Filter to Initial Data state
+   */
+  const clearFilter = (): void => {
+    if (result.status === 'loaded') {
+      setParts(result.parts);
+    }
+  }
 
   useEffect(() => {
     getAllData()
@@ -26,7 +48,7 @@ const useWidgetDataService = () => {
       });
   }, []);
 
-  return {result, status, error, parts };
+  return {error, parts, result, status, clearFilter, performFilter };
 };
 
 export {useWidgetDataService};

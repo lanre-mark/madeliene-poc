@@ -12,14 +12,20 @@ function App() {
   const {
     status, 
     parts, 
+    performFilter, 
+    clearFilter, 
   } = useWidgetDataService();
+
+  const onAutoSelection = (srch: string): void => {
+    srch === '' ? clearFilter() : performFilter(srch);
+  }
 
   return (
     <div className="App">
       {status === 'loading' && <div>Loading...</div>}
       {status === 'loaded' && 
         <>
-        <HeaderForm data={parts.map((p) => p.name)}/>
+        <HeaderForm data={parts.map((p) => p.name)} onSelect={onAutoSelection}/>
         <Table widgets={parts} />
         </>
       }

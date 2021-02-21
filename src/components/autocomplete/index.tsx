@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import "./style.css";
 
-const Autocomplete = ({ data = [] }: { data: string[] }) => {
+const Autocomplete: React.FunctionComponent<any> = (
+  { data = [], 
+    onSelect 
+  }: 
+  { data: string[], 
+    onSelect: (srch: string) => void //React.Dispatch<React.SetStateAction<{}>>
+  }) => {
   const [userInput, setUserInput] = useState<string>("");
   const [filtered, setFiltered] = useState<string[]>([]);
   const [activeSuggestion, setActiveSuggestion] = useState<number>(0);
@@ -28,6 +34,10 @@ const Autocomplete = ({ data = [] }: { data: string[] }) => {
     if (e.key === "Enter") {
       setUserInput(filtered[activeSuggestion]);
       setFiltered([]);
+      if (activeSuggestion === 0) {
+        setUserInput('')
+        onSelect(userInput);    
+      }
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       if (activeSuggestion === 0) {
@@ -48,6 +58,7 @@ const Autocomplete = ({ data = [] }: { data: string[] }) => {
     setActiveSuggestion(0);
     setFiltered([]);
     setUserInput(e.currentTarget.innerText);
+    onSelect(e.currentTarget.innerText);
   };
 
   return (
