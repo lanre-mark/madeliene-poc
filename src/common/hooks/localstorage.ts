@@ -1,0 +1,65 @@
+import {useState, useRef} from 'react'
+
+const useLocalStorageState = <T>(
+  key: string, 
+  defaultValue?: T,
+  )
+  : [T, (value: T) => void] => {
+
+  const readStoredValue = () => {
+    // Prevent build error "window is undefined" but keep keep working
+    if (typeof window === 'undefined') {
+      return defaultValue
+    }
+    try {
+      const item = window.localStorage.getItem(key)
+      return item ? JSON.parse(item) : defaultValue ? defaultValue : null;
+    } catch (error) {
+      console.warn(`Error reading localStorage key “${key}”:`, error)
+      return defaultValue
+    }
+  };
+
+  // Pass initial state function to useState so logic is only executed once
+  const [storedValue, setStoredValue] = useState<T>(readStoredValue());
+
+  // for any key used in local storage and got changed
+  // lets take note and perform some cleanups
+  const prevKeyRef = useRef(key);
+
+  // Return a wrapped version of useState's setter function that ...
+  // ... persists the new value to localStorage.
+  const setValue = (value: T) => {
+    // Prevent build error "window is undefined" but keep keep working
+    if (typeof window == 'undefined') {
+      console.warn(
+        `Tried setting localStorage key “${key}” even though environment is not a client`,
+      );
+    }
+
+    try {
+      // Allow value to be a function so we have the same API as useState
+      const newValue = value instanceof Function ? value(storedValue) : value;
+      
+      // key clean up
+      const prevKey = prevKeyRef.current;
+      if (prevKey !== key) {
+        window.localStorage.removeItem(prevKey);
+      }
+      prevKeyRef.current = key;
+
+      // Save to local storage
+      window.localStorage.setItem(key, JSON.stringify(newValue));
+      // Save state
+      setStoredValue(newValue);
+
+    } catch (error) {
+      console.warn(`Error setting localStorage key “${key}”:`, error);
+    }
+  }
+
+  return [storedValue, setValue];
+
+}
+
+export {useLocalStorageState}
