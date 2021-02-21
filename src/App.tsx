@@ -15,6 +15,7 @@ function App() {
     status, 
     clearFilter, 
     performFilter, 
+    sortWidgetsData,
   } = useWidgetDataService();
 
   const onAutoSelection = (srch: string): void => {
@@ -27,7 +28,7 @@ function App() {
       {status === 'loaded' && 
         <>
         <HeaderForm data={partnames} onSelect={onAutoSelection}/>
-        <Table widgets={parts} />
+        <Table widgets={parts} sortaction={sortWidgetsData}/>
         </>
       }
       {status === 'error' && (

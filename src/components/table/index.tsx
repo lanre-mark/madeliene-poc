@@ -1,17 +1,36 @@
 import React from 'react'
-import {IWidget} from '../../common/types';
+
+import {COLUMN_NAME, COLUMN_PRICE, COLUMN_INSTOCK, IWidget, SortAction, SortColumn} from '../../common/types';
 import {ToNumberPresentation} from '../../common/helper';
+
 import './table.css'
 
-const TableHeader: React.FunctionComponent<any> = () => {
+
+const TableHeader: React.FunctionComponent<any> = ({sortaction}) => {
+
+  const onHeaderClick = (e: React.MouseEvent<HTMLTableHeaderCellElement, MouseEvent>, type: SortColumn) => {
+    switch (type) {
+      case COLUMN_NAME:
+        sortaction(COLUMN_NAME);
+        break;
+      case COLUMN_PRICE:
+        sortaction(COLUMN_PRICE);
+        break;
+      case COLUMN_INSTOCK:
+        sortaction(COLUMN_INSTOCK);
+        break;
+      default:
+        break;
+    }
+  };
 
   return  (
     <thead>
       <tr>
         <th>ID</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Stock</th>
+        <th onClick={(e) => onHeaderClick(e, COLUMN_NAME)}>Name</th>
+        <th onClick={(e) => onHeaderClick(e, COLUMN_PRICE)}>Price</th>
+        <th onClick={(e) => onHeaderClick(e, COLUMN_INSTOCK)}>Stock</th>
       </tr>
     </thead>
   )
@@ -41,15 +60,17 @@ const TableRows: React.FunctionComponent<any> = ({widgets}: {widgets: IWidget[]}
 
 const Table: React.FunctionComponent<any> = ({
   widgets,
+  sortaction,
 }: {
   widgets: IWidget[],
+  sortaction: SortAction,
 }) => {
 
   return (
     <>
       <div className='scrollctrl'>
         <table className='widgets'>
-          {<TableHeader/>}
+          {<TableHeader sortaction={sortaction}/>}
           {<TableRows widgets={widgets}/>}
         </table>
       </div>

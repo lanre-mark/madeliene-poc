@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { IWidget, PartsService } from '../types';
+import { COLUMN_NAME, Direction, IWidget, PartsService, SortColumn, SortColumnDirection, SortDirection } from '../types';
 import { getAllData } from '../../data';
 
 const useWidgetDataService = () => {
@@ -11,6 +11,42 @@ const useWidgetDataService = () => {
   const [error, setError] = useState<Error | undefined>(() => undefined);
   const [parts, setParts] = useState<IWidget[]>(() => []);
   const [partnames, setPartnames] = useState<string[]>(() => []);
+
+  // sort direction
+  const [sortDirections, setSortDirections] = useState<SortColumnDirection>(() => ({
+    name: Direction.NONE,
+    price: Direction.NONE,
+    instock: Direction.NONE,
+  }));
+
+  // perform sorting
+  /**
+   * 
+   * @param column The data/table column to use for sorting the data
+   * @param direction The direction to be used ASC or DESC in sorting
+   */
+  const sortWidgetsData = (column: SortColumn, direction: SortDirection = Direction.DESC ): void => {
+    
+    const orderCtrl = sortDirections[column] === Direction.ASC ? Direction.DESC : sortDirections[column] === Direction.NONE ? direction : Direction.ASC ;
+
+    // console.log(`Sorting ${column} header ib the ${orderCtrl} direction`);    
+
+    const sortComparator = (a: IWidget , b: IWidget): number => {
+      return orderCtrl === Direction.DESC ? 
+        b[column].localeCompare(a[column], undefined, {numeric: column === COLUMN_NAME ? false : true}) :
+        a[column].localeCompare(b[column], undefined, {numeric: column === COLUMN_NAME ? false : true});
+    }
+
+    const orderedData = parts.sort(sortComparator);
+
+    setParts(orderedData);
+
+    setSortDirections((prevState) => ({
+      ...prevState, 
+      [column]: prevState[column] === Direction.ASC ? Direction.DESC : Direction.ASC,
+    }));
+
+  }
 
   /**
    * perform filtering
@@ -53,7 +89,7 @@ const useWidgetDataService = () => {
       });
   }, []);
 
-  return {error, parts, partnames, result, status, clearFilter, performFilter };
+  return {error, parts, partnames, result, status, clearFilter, performFilter, sortWidgetsData };
 };
 
 export {useWidgetDataService};

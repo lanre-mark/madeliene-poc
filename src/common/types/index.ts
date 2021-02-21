@@ -2,7 +2,8 @@ import {HTTPErrorType} from './error';
 import {
   COLUMN_NAME, 
   COLUMN_PRICE, 
-  COLUMN_INSTOCK, 
+  COLUMN_INSTOCK,
+  Direction,
   PartsDataIdle, 
   PartsDataLoaded, 
   PartsDataLoading, 
@@ -14,6 +15,15 @@ import {
 */
 export type NumberFormats = 'N' | 'C';
 
+export type SortColumn = typeof COLUMN_NAME | typeof COLUMN_PRICE | typeof COLUMN_INSTOCK;
+
+export type SortDirection = Direction.DESC | Direction.ASC;
+
+export interface SortColumnDirection {
+  name: Direction,
+  price: Direction,
+  instock: Direction, 
+}
 
 /*
   Widget interface
@@ -23,6 +33,10 @@ export interface IWidget {
   name: string;
   price: string;
   instock: string;
+}
+
+export interface SortAction {
+  sortaction: (column: SortColumn, direction: SortDirection) => void;
 }
 
 export type PartsService<T> =
@@ -35,5 +49,6 @@ export {
   COLUMN_NAME, 
   COLUMN_PRICE, 
   COLUMN_INSTOCK,
+  Direction,
   HTTPErrorType 
 }
