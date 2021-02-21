@@ -10,6 +10,7 @@ const useWidgetDataService = () => {
   const [status, setStatus] = useState<string>(() => '');
   const [error, setError] = useState<Error | undefined>(() => undefined);
   const [parts, setParts] = useState<IWidget[]>(() => []);
+  const [partnames, setPartnames] = useState<string[]>(() => []);
 
   /**
    * perform filtering
@@ -39,16 +40,20 @@ const useWidgetDataService = () => {
       .then(response => {
         setResult({ status: 'loaded', parts: response });
         setParts(response);
+        setPartnames(() => {
+          return response && response.length > 0 ? response.map((p: IWidget) => p.name) : []
+        });
         setStatus('loaded');
       })
       .catch(error => {
         setResult({ status: 'error', error });
         setError(error);
         setStatus('error');
+        setPartnames([]);
       });
   }, []);
 
-  return {error, parts, result, status, clearFilter, performFilter };
+  return {error, parts, partnames, result, status, clearFilter, performFilter };
 };
 
 export {useWidgetDataService};

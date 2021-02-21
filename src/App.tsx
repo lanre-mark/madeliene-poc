@@ -10,10 +10,11 @@ import "./App.css";
 function App() {
 
   const {
-    status, 
     parts, 
-    performFilter, 
+    partnames, 
+    status, 
     clearFilter, 
+    performFilter, 
   } = useWidgetDataService();
 
   const onAutoSelection = (srch: string): void => {
@@ -25,7 +26,7 @@ function App() {
       {status === 'loading' && <div>Loading...</div>}
       {status === 'loaded' && 
         <>
-        <HeaderForm data={parts.map((p) => p.name)} onSelect={onAutoSelection}/>
+        <HeaderForm data={partnames} onSelect={onAutoSelection}/>
         <Table widgets={parts} />
         </>
       }
