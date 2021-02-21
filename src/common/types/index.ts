@@ -9,6 +9,7 @@ import {
   PartsDataLoading, 
   PartsServiceError, 
 } from './type';
+import { OutofstockIcon, RestockInfo} from '../../components/toast/icons';
 
 /*
   number formats for String transformation/representations
@@ -33,6 +34,17 @@ export interface IWidget {
   name: string;
   price: string;
   instock: string;
+}
+
+/**
+ * toast notification interface
+ */
+export interface INotification {
+  id: string;
+  title: string;
+  description: string;
+  backgroundColor: string;
+  icon: typeof OutofstockIcon | typeof RestockInfo
 }
 
 export interface SortAction {
