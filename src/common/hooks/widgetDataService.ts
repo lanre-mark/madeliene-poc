@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react';
 import { COLUMN_NAME, Direction, IWidget, PartsService, SortColumn, SortColumnDirection, SortDirection } from '../types';
 import { getAllData } from '../../data';
 
+import {useLocalStorageState} from './';
+
 const useWidgetDataService = () => {
+
+  const [restocklvl] = useLocalStorageState('restocklevel', 10);
 
   const [result, setResult] = useState<PartsService<IWidget[]>>({
     status: 'loading'
@@ -47,6 +51,10 @@ const useWidgetDataService = () => {
     }));
 
   }
+
+  useEffect(() => {
+    console.log('Re-Stock level has changed');
+  }, [restocklvl])
 
   /**
    * perform filtering
