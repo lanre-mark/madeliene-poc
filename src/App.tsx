@@ -1,6 +1,6 @@
 import React from "react";
 
-import Autocomplete from "./components/autocomplete";
+import HeaderForm from './components/top-header/header-form';
 import Table from './components/table';
 import {useWidgetDataService} from './common/hooks';
 
@@ -19,7 +19,7 @@ function App() {
       {status === 'loading' && <div>Loading...</div>}
       {status === 'loaded' && 
         <>
-        Search: <Autocomplete data={parts.map((p) => p.name)} />
+        <HeaderForm data={parts.map((p) => p.name)}/>
         <Table widgets={parts} />
         </>
       }

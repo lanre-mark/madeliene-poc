@@ -1,0 +1,16 @@
+.header-component {
+  text-align: center;
+}
+
+.header-component label {
+  display: block;
+  margin: 15px 0;
+}
+
+.header-component input {
+  margin-left: 10px;
+}
+
+.header-component .restocklevel {
+  width: 50px;
+}
