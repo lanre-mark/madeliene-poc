@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { COLUMN_NAME, Direction, IWidget, PartsService, SortColumn, SortColumnDirection, SortDirection } from '../types';
+import { COLUMN_NAME, Direction, INotification, IWidget, PartsService, SortColumn, SortColumnDirection, SortDirection } from '../types';
 import { getAllData } from '../../data';
+import {OutofstockIcon, RestockInfo} from '../../components/toast/icons';
 
 import {useLocalStorageState} from './';
 
@@ -15,6 +16,8 @@ const useWidgetDataService = () => {
   const [error, setError] = useState<Error | undefined>(() => undefined);
   const [parts, setParts] = useState<IWidget[]>(() => []);
   const [partnames, setPartnames] = useState<string[]>(() => []);
+  const [notificationList, setNotificationList] = useState<INotification[]>(() => []);
+  const [showNotification, setShowNotification] = useState<boolean>(() => false);
 
   // sort direction
   const [sortDirections, setSortDirections] = useState<SortColumnDirection>(() => ({
@@ -52,8 +55,32 @@ const useWidgetDataService = () => {
 
   }
 
+  const generateNotificationList = (): void => {
+    // Use re stock level staticly here
+    // but we can combine a bunch of algorithms
+    //    using rate at which items are purchased
+    //    number of days it takes to re-order and item
+    //    and a percentage level
+    //    to determine re-stock point
+    if (result.status === 'loaded') {
+      const notifyStock = result.parts.filter((prts: IWidget): boolean => {
+        return parseFloat(prts.instock) <= restocklvl;
+      }).map((widget: IWidget) => ({
+        id: widget.id.toString(),
+        title: parseFloat(widget.instock) === 0 ? 'Out of Stock' : 'Re-Stock',
+        description: parseFloat(widget.instock) === 0 ? `You are out of ${widget.name.toLowerCase()}'s stock, please re-order now.` : `Please re-stock ${widget.name.toLowerCase()}, you have ${widget.instock} unit${parseFloat(widget.instock) <= 1 ? '' : 's'} left.`,
+        backgroundColor: parseFloat(widget.instock) === 0 ? '#d9534f' : '#5cb85c',
+        icon: parseFloat(widget.instock) === 0 ? OutofstockIcon : RestockInfo,
+      }));
+      setNotificationList(notifyStock);
+      setShowNotification(true);
+    }
+  };
+
   useEffect(() => {
-    console.log('Re-Stock level has changed');
+    // console.log('Re-Stock level has changed');
+    generateNotificationList();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [restocklvl])
 
   /**
@@ -87,6 +114,7 @@ const useWidgetDataService = () => {
         setPartnames(() => {
           return response && response.length > 0 ? response.map((p: IWidget) => p.name) : []
         });
+        generateNotificationList();
         setStatus('loaded');
       })
       .catch(error => {
@@ -95,9 +123,10 @@ const useWidgetDataService = () => {
         setStatus('error');
         setPartnames([]);
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return {error, parts, partnames, result, status, clearFilter, performFilter, sortWidgetsData };
+  return {error, notificationList, parts, partnames, result, showNotification, status, clearFilter, performFilter, setShowNotification, sortWidgetsData };
 };
 
 export {useWidgetDataService};

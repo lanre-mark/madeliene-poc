@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './toast.css';
 
-const Toast: React.FunctionComponent<any> = ({ notificationList, autoDelete = true, dismissTime = 5000 }: 
+const Toast: React.FunctionComponent<any> = ({ notificationList, notifyState, autoDelete = true, dismissTime = 5000 }: 
   {
     notificationList: any[],
+    notifyState: React.Dispatch<React.SetStateAction<{}>>,
     autoDelete: boolean,
     dismissTime: number}
   ) => {
@@ -20,7 +21,10 @@ const Toast: React.FunctionComponent<any> = ({ notificationList, autoDelete = tr
       list.splice(listItemIndex, 1);
       notificationList.splice(toastListItem, 1);
       setList([...list]);
-    }, [notificationList, list])
+      if (notificationList.length === 0 ) {
+        notifyState(false);
+      }
+    }, [notificationList, list, notifyState])
 
     useEffect(() => {
         const interval = setInterval(() => {

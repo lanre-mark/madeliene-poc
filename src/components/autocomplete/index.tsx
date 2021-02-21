@@ -73,7 +73,7 @@ const Autocomplete: React.FunctionComponent<any> = (
       <ul>
         {filtered.length > 0 ? (
           filtered.map((row, idx) => {
-            console.log(`row ${row} - ${idx}`);
+            // console.log(`row ${row} - ${idx}`);
             return (
               <li
                 className={
