@@ -3,6 +3,8 @@ import "./App.css";
 import {IWidget} from './common/types';
 import Table from './components/table';
 
+import { getAllData } from './data';
+
 import Autocomplete from "./components/autocomplete";
 
 
@@ -11,9 +13,8 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const resp = await fetch("http://localhost:8000/parts");
-      const data = await resp.json();
-      const myData: IWidget[] = data;
+      const resp = await getAllData();
+      const myData: IWidget[] = resp;
       setParts(myData);
     };
     fetchData();
