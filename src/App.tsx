@@ -1,29 +1,31 @@
-import React, { useEffect, useState } from "react";
-import "./App.css";
-import {IWidget} from './common/types';
-import Table from './components/table';
-
-import { getAllData } from './data';
+import React from "react";
 
 import Autocomplete from "./components/autocomplete";
+import Table from './components/table';
+import {useWidgetDataService} from './common/hooks';
+
+import "./App.css";
 
 
 function App() {
-  const [parts, setParts] = useState<IWidget[]>([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const resp = await getAllData();
-      const myData: IWidget[] = resp;
-      setParts(myData);
-    };
-    fetchData();
-  }, []);
+  const {
+    status, 
+    parts, 
+  } = useWidgetDataService();
 
   return (
     <div className="App">
-      Search: <Autocomplete data={parts.map((p) => p.name)} />
-      <Table widgets={parts} />
+      {status === 'loading' && <div>Loading...</div>}
+      {status === 'loaded' && 
+        <>
+        Search: <Autocomplete data={parts.map((p) => p.name)} />
+        <Table widgets={parts} />
+        </>
+      }
+      {status === 'error' && (
+        <div>Error, the backend moved to the dark side.</div>
+      )}
     </div>
   );
 }

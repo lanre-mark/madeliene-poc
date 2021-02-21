@@ -3,6 +3,10 @@ import {
   COLUMN_NAME, 
   COLUMN_PRICE, 
   COLUMN_INSTOCK, 
+  PartsDataIdle, 
+  PartsDataLoaded, 
+  PartsDataLoading, 
+  PartsServiceError, 
 } from './type';
 
 /*
@@ -21,7 +25,11 @@ export interface IWidget {
   instock: string;
 }
 
-
+export type PartsService<T> =
+  | PartsDataIdle
+  | PartsDataLoading
+  | PartsDataLoaded<T>
+  | PartsServiceError;
 
 export { 
   COLUMN_NAME, 
