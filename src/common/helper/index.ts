@@ -1,3 +1,5 @@
+import {HTTPError} from './http-error';
+import {stringifyErrorDescription} from './error-format';
 import {ToNumberPresentation} from './formatting';
 
-export {ToNumberPresentation}
+export {HTTPError, stringifyErrorDescription, ToNumberPresentation}
