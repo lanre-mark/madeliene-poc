@@ -13,10 +13,10 @@ const Autocomplete: React.FunctionComponent<any> = (
   const [activeSuggestion, setActiveSuggestion] = useState<number>(0);
 
   const cmp = (row: string, text: string) => {
-    console.log(`cmp: ${row} to ${text}`);
+    // console.log(`cmp: ${row} to ${text}`);
 
     const r = row.toLocaleLowerCase().indexOf(text) > -1;
-    console.log(r);
+    // console.log(r);
     return r;
   };
 
@@ -46,7 +46,7 @@ const Autocomplete: React.FunctionComponent<any> = (
       setActiveSuggestion(activeSuggestion - 1);
     } else if (e.key === "ArrowDown") {
       e.preventDefault();
-      console.log(`Active ${activeSuggestion} Length: ${filtered.length}`);
+      // console.log(`Active ${activeSuggestion} Length: ${filtered.length}`);
       if (activeSuggestion + 1 === filtered.length) {
         return;
       }
