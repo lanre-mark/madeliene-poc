@@ -23,3 +23,7 @@ export function stringifyErrorDescription(errorDescription: string, error: any):
       : '(missing error information)' // Error not described and missing types to determine error
   }`;
 }
+
+export function assertUnreachableTypes(_enum: never, desc: string = ''): never {
+  throw new Error(desc === '' ? "This is a new type, please cover all base types" : desc);
+}

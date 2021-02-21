@@ -1,6 +1,7 @@
 import React from 'react'
 
 import {COLUMN_NAME, COLUMN_PRICE, COLUMN_INSTOCK, IWidget, SortAction, SortColumn} from '../../common/types';
+import {assertUnreachableTypes} from '../../common/helper';
 import {ToNumberPresentation} from '../../common/helper';
 
 import './table.css'
@@ -20,7 +21,7 @@ const TableHeader: React.FunctionComponent<any> = ({sortaction}) => {
         sortaction(COLUMN_INSTOCK);
         break;
       default:
-        break;
+        assertUnreachableTypes(type, 'Unrecognized sort column');
     }
   };
 
