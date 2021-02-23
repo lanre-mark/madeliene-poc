@@ -3,10 +3,20 @@ import React from 'react'
 import {ITableRows, IWidget, IWidgetTableRow} from '../../common/types';
 import {ToNumberPresentation} from '../../common/helper';
 
-const WidgetTableRow: React.FunctionComponent<IWidgetTableRow> = ({widget, ndx}): any => {
+const WidgetTableRow: React.FunctionComponent<IWidgetTableRow> = ({widget, notificationList, notifystatus, ndx}): any => {
+  let colourHint = {};
+  if (notifystatus && notificationList) {
+    if (notificationList.length > 0) {
+      const notifyPart = notificationList.findIndex(e => e.id === widget.id.toString());
+      if (notifyPart >= 0) {
+        colourHint = {backgroundColor: notificationList[notifyPart].backgroundColor};
+      }
+    }
+  }
   return (
     <tr
-        key={widget.id}
+      key={widget.id}
+      style={colourHint}
     >
       <td>{ndx + 1}</td>
       <td style={{textAlign: 'left'}}>{widget.name}</td>
@@ -16,10 +26,10 @@ const WidgetTableRow: React.FunctionComponent<IWidgetTableRow> = ({widget, ndx})
   )
 }
 
-const TableRows: React.FunctionComponent<ITableRows> = ({widgets}) => {
+const TableRows: React.FunctionComponent<ITableRows> = ({widgets, notificationList, notifystatus}) => {
   return (
     <tbody>
-      {widgets.map((widget: IWidget, index: number) => WidgetTableRow({widget, ndx: index})) }
+      {widgets.map((widget: IWidget, index: number) => WidgetTableRow({widget, notificationList, notifystatus, ndx: index})) }
     </tbody>
   )
 }

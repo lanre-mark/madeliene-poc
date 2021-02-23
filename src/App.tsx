@@ -1,6 +1,7 @@
 import React from "react";
 
 import HeaderForm from './components/top-header/header-form';
+import Loading from './components/Loading';
 import Table from './components/table';
 import Toast from './components/toast'
 
@@ -29,11 +30,11 @@ function App() {
 
   return (
     <div className="App">
-      {status === 'loading' && <div>Loading...</div>}
+      {status === 'loading' && <div><Loading message={'establishing connection with the server.....'}/></div>}
       {status === 'loaded' && 
         <>
           <HeaderForm data={partnames} onSelect={onAutoSelection}/>
-          <Table widgets={parts} sortaction={sortWidgetsData}/>
+          <Table widgets={parts} sortaction={sortWidgetsData}  notificationList={notificationList} notifystatus={showNotification}/>
           {showNotification && <Toast notificationList={notificationList} notifyState={setShowNotification}/>}
         </>
       }

@@ -11,7 +11,7 @@ const Toast: React.FunctionComponent<IToast> = (
         notificationList, 
         notifyState, 
         autoDelete = true, 
-        dismissTime = 5000 
+        dismissTime = 2500 
     }
   ) => {
 
@@ -58,7 +58,7 @@ const Toast: React.FunctionComponent<IToast> = (
                                 X
                             </button>
                             <div className="notification-image">
-                                <toast.icon />
+                                <toast.icon className={'img'}/>
                             </div>
                             <div>
                                 <p className="notification-title">{toast.title}</p>

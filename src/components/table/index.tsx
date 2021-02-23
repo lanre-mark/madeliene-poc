@@ -9,6 +9,8 @@ import './table.css'
 
 const Table: React.FunctionComponent<ITable> = ({
   widgets,
+  notificationList,
+  notifystatus,
   sortaction,
 }) => {
 
@@ -17,7 +19,7 @@ const Table: React.FunctionComponent<ITable> = ({
       <div className='scrollctrl'>
         <table className='widgets'>
           {<TableHeader sortaction={sortaction}/>}
-          {<TableRows widgets={widgets}/>}
+          {<TableRows widgets={widgets}  notificationList={notificationList} notifystatus={notifystatus}/>}
         </table>
       </div>
     </>

@@ -15,20 +15,27 @@ import {OutofstockIcon, RestockInfo} from '../../components/toast/icons';
 import {useLocalStorageState} from './';
 
 const useWidgetDataService = () => {
-
+  
+  // re-stocking level from local storage hook
   const [restocklvl] = useLocalStorageState('restocklevel', 10);
 
-  const [result, setResult] = useState<PartsService<IWidget[]>>({
+  // widget db serice response initialized to 'loading' status
+  const [serviceResponse, setServiceResponse] = useState<PartsService<IWidget[]>>({
     status: 'loading'
   });
+
+  // state variables for status of service
   const [status, setStatus] = useState<string>(() => '');
   const [error, setError] = useState<Error | undefined>(() => undefined);
+  
+  // parts state for list of IWidget types
   const [parts, setParts] = useState<IWidget[]>(() => []);
   const [partnames, setPartnames] = useState<string[]>(() => []);
+
   const [notificationList, setNotificationList] = useState<INotification[]>(() => []);
   const [showNotification, setShowNotification] = useState<boolean>(() => false);
 
-  // sort direction
+  // sort direction - ascending|descending
   const [sortDirections, setSortDirections] = useState<SortColumnDirection>(() => ({
     name: Direction.NONE,
     price: Direction.NONE,
@@ -75,8 +82,8 @@ const useWidgetDataService = () => {
     //    number of days it takes to re-order and item
     //    and a percentage level
     //    to determine re-stock point
-    if (result.status === 'loaded') {
-      const notifyStock = result.parts.filter((prts: IWidget): boolean => {
+    if (serviceResponse.status === 'loaded') {
+      const notifyStock = serviceResponse.parts.filter((prts: IWidget): boolean => {
         return parseFloat(prts.instock) <= restocklvl;
       }).map((widget: IWidget) => ({
         id: widget.id.toString(),
@@ -101,9 +108,9 @@ const useWidgetDataService = () => {
    * @param filterBy string to filter main data with
    */
   const performFilter = (filterBy: string): void => {
-    if (result.status === 'loaded') {
+    if (serviceResponse.status === 'loaded') {
       setStatus('loading');
-      const filteredParts = result.parts.filter((prts: IWidget): boolean => {
+      const filteredParts = serviceResponse.parts.filter((prts: IWidget): boolean => {
         return prts.name.toLowerCase().includes(filterBy.toLowerCase());
       })
       setParts(filteredParts);
@@ -114,15 +121,15 @@ const useWidgetDataService = () => {
    * Reset Filter to Initial Data state
    */
   const clearFilter = (): void => {
-    if (result.status === 'loaded') {
-      setParts(result.parts);
+    if (serviceResponse.status === 'loaded') {
+      setParts(serviceResponse.parts);
     }
   }
 
   useEffect(() => {
     getAllData()
       .then(response => {
-        setResult({ status: 'loaded', parts: response });
+        setServiceResponse({ status: 'loaded', parts: response });
         setParts(response);
         setPartnames(() => {
           return response && response.length > 0 ? response.map((p: IWidget) => p.name) : []
@@ -131,7 +138,7 @@ const useWidgetDataService = () => {
         setStatus('loaded');
       })
       .catch(error => {
-        setResult({ status: 'error', error });
+        setServiceResponse({ status: 'error', error });
         setError(error);
         setStatus('error');
         setPartnames([]);
@@ -144,11 +151,14 @@ const useWidgetDataService = () => {
     notificationList, 
     parts, 
     partnames, 
-    result, 
+    serviceResponse, 
     showNotification, 
     status, 
     clearFilter, 
     performFilter, 
+    setPartnames,
+    setParts,
+    setServiceResponse,
     setShowNotification, 
     sortWidgetsData 
   };

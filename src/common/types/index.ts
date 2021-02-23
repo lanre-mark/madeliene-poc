@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import {HTTPErrorType} from './error';
 import {
   COLUMN_NAME, 
@@ -57,6 +59,11 @@ export type PartsService<T> =
   | PartsDataLoaded<T>
   | PartsServiceError;
 
+export interface ILoading {
+  message?: string;
+  children?: ReactNode
+}
+
 export interface IAutoComplete {
   data: string[];
   onSelect: (srch: string) => void;
@@ -68,11 +75,15 @@ export interface ITableHeader {
 
 export interface ITable {
   widgets: IWidget[];
+  notificationList: INotification[];
+  notifystatus: boolean;
   sortaction: (column: SortColumn, direction?: SortDirection) => void;
 }
 
 export interface ITableRows {
-  widgets: IWidget[]
+  widgets: IWidget[];
+  notificationList: INotification[];
+  notifystatus: boolean
 }
 
 export interface IIcon {
@@ -81,6 +92,7 @@ export interface IIcon {
   fillColor?: string;
   fillColor1?: string;
   fillColor2?: string;
+  [x:string]: any;
 }
 
 export interface IToast {
@@ -97,6 +109,8 @@ export interface IHeaderForm {
   
 export interface IWidgetTableRow {
   widget: IWidget;
+  notificationList: INotification[];
+  notifystatus: boolean;
   ndx: number;
 }
 
