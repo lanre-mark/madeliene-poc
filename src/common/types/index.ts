@@ -22,6 +22,11 @@ export type SortColumn = typeof COLUMN_NAME | typeof COLUMN_PRICE | typeof COLUM
 
 export type SortDirection = Direction.DESC | Direction.ASC;
 
+export interface ActiveSortData {
+  direction: Direction;
+  column: SortColumn;
+}
+
 export interface SortColumnDirection {
   name: Direction,
   price: Direction,
@@ -59,6 +64,16 @@ export type PartsService<T> =
   | PartsDataLoaded<T>
   | PartsServiceError;
 
+export interface Props {
+  children: ReactNode;
+  FallbackComponent: React.FunctionComponent<{error: Error | undefined}> ;
+}
+
+export interface State {
+  hasError: boolean;
+  error?: Error;
+}
+  
 export interface ILoading {
   message?: string;
   children?: ReactNode

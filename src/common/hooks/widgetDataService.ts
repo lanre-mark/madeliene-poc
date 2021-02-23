@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { 
+  ActiveSortData,
   COLUMN_NAME, 
   Direction, 
   INotification, 
@@ -42,6 +43,13 @@ const useWidgetDataService = () => {
     instock: Direction.NONE,
   }));
 
+  // state for active sort direction and columns
+  //  initialized to NO direction and 'name' column
+  const [activeSortObjects, setActiveSortObjects] = useState<ActiveSortData>(() => ({
+    direction: Direction.NONE,
+    column: COLUMN_NAME
+  }));
+
   // perform sorting
   /**
    * 
@@ -55,6 +63,12 @@ const useWidgetDataService = () => {
       direction : Direction.ASC ;
 
     // console.log(`Sorting ${column} header ib the ${orderCtrl} direction`);    
+
+    setActiveSortObjects((prevState) => ({
+      ...prevState,
+      column,
+      direction
+    }));
 
     const sortComparator = (a: IWidget , b: IWidget): number => {
       return orderCtrl === Direction.DESC ? 
@@ -147,6 +161,7 @@ const useWidgetDataService = () => {
   }, []);
 
   return {
+    activeSortObjects,
     error, 
     notificationList, 
     parts, 

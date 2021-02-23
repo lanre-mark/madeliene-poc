@@ -2,6 +2,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import './index.css';
 import App from './App';
+import {ErrorBoundary, ErrorFallback} from './components/error-boundary';
 import reportWebVitals from './reportWebVitals';
 
 /*
@@ -13,7 +14,9 @@ function initializeInventoryApp() {
   if (!appRoot) throw new Error('No #root found in DOM');
   render(
     <React.StrictMode>
-      <App />
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <App />
+      </ErrorBoundary>
     </React.StrictMode>,
     appRoot
   );

@@ -30,12 +30,23 @@ function App() {
 
   return (
     <div className="App">
-      {status === 'loading' && <div><Loading message={'establishing connection with the server.....'}/></div>}
+      {status === 'loading' && <div>
+        <Loading 
+          message={'establishing connection with the server.....'}/>
+        </div>
+      }
       {status === 'loaded' && 
         <>
           <HeaderForm data={partnames} onSelect={onAutoSelection}/>
-          <Table widgets={parts} sortaction={sortWidgetsData}  notificationList={notificationList} notifystatus={showNotification}/>
-          {showNotification && <Toast notificationList={notificationList} notifyState={setShowNotification}/>}
+          <Table widgets={parts} sortaction={sortWidgetsData} 
+            notificationList={notificationList} 
+            notifystatus={showNotification}
+          />
+          {showNotification && 
+            <Toast notificationList={notificationList} 
+              notifyState={setShowNotification}
+              />
+          }
         </>
       }
       {status === 'error' && (
