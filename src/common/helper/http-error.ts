@@ -29,4 +29,4 @@ class HTTPError extends Error {
   }
 }
 
-export {HTTPError};
+export default HTTPError;

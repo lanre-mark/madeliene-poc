@@ -47,15 +47,58 @@ export interface INotification {
   icon: typeof OutofstockIcon | typeof RestockInfo
 }
 
-export interface SortAction {
-  sortaction: (column: SortColumn, direction: SortDirection) => void;
-}
+// export interface SortAction {
+//   sortaction: (column: SortColumn, direction: SortDirection) => void;
+// }
 
 export type PartsService<T> =
   | PartsDataIdle
   | PartsDataLoading
   | PartsDataLoaded<T>
   | PartsServiceError;
+
+export interface IAutoComplete {
+  data: string[];
+  onSelect: (srch: string) => void;
+}
+
+export interface ITableHeader {
+  sortaction: (column: SortColumn, direction?: SortDirection) => void;
+}
+
+export interface ITable {
+  widgets: IWidget[];
+  sortaction: (column: SortColumn, direction?: SortDirection) => void;
+}
+
+export interface ITableRows {
+  widgets: IWidget[]
+}
+
+export interface IIcon {
+  title?: string;
+  desc?: string;
+  fillColor?: string;
+  fillColor1?: string;
+  fillColor2?: string;
+}
+
+export interface IToast {
+  notificationList: INotification[],
+  notifyState: React.Dispatch<React.SetStateAction<boolean>>,
+  autoDelete?: boolean,
+  dismissTime?: number
+}
+
+export interface IHeaderForm {
+  data: string[], 
+  onSelect: (srch: string) => void, //React.Dispatch<React.SetStateAction<{}>>
+}
+  
+export interface IWidgetTableRow {
+  widget: IWidget;
+  ndx: number;
+}
 
 export { 
   COLUMN_NAME, 

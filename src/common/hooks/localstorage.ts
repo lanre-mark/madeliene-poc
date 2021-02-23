@@ -92,4 +92,4 @@ const useLocalStorageState = <T>(
 
 }
 
-export {useLocalStorageState}
+export default useLocalStorageState

@@ -1,8 +1,10 @@
 import React from 'react';
 import shortid from 'shortid';
 
+import {IIcon} from '../../../common/types';
+
 const id = `outofstock_${shortid.generate()}`;
-const Icon: React.FunctionComponent<any> = ({ title, desc, fillColor1, fillColor2, ...props }: {title: string, desc: string, fillColor1: string, fillColor2: string}) => {
+const Icon: React.FunctionComponent<IIcon> = ({ title, desc, fillColor1, fillColor2, ...props }) => {
   return (
     <svg
       id={id}
@@ -12,8 +14,8 @@ const Icon: React.FunctionComponent<any> = ({ title, desc, fillColor1, fillColor
       xmlns="http://www.w3.org/2000/svg"
     >
       <g>
-        <title id={`${id}_Title`}>{title}</title>
-        <desc id={`${id}_Desc`}>{desc}</desc>
+        <title id={`${id}_Title`}>{title || ''}</title>
+        <desc id={`${id}_Desc`}>{desc || ''}</desc>
         <rect fill="none" id={`${id}_canvas_background`} height="402" width="582" y="-1" x="-1"/>
         </g>
         <g>

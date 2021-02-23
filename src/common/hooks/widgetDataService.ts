@@ -1,5 +1,14 @@
 import { useEffect, useState } from 'react';
-import { COLUMN_NAME, Direction, INotification, IWidget, PartsService, SortColumn, SortColumnDirection, SortDirection } from '../types';
+import { 
+  COLUMN_NAME, 
+  Direction, 
+  INotification, 
+  IWidget, 
+  PartsService, 
+  SortColumn, 
+  SortColumnDirection, 
+  SortDirection 
+} from '../types';
 import { getAllData } from '../../data';
 import {OutofstockIcon, RestockInfo} from '../../components/toast/icons';
 
@@ -34,14 +43,18 @@ const useWidgetDataService = () => {
    */
   const sortWidgetsData = (column: SortColumn, direction: SortDirection = Direction.DESC ): void => {
     
-    const orderCtrl = sortDirections[column] === Direction.ASC ? Direction.DESC : sortDirections[column] === Direction.NONE ? direction : Direction.ASC ;
+    const orderCtrl = sortDirections[column] === Direction.ASC ? 
+      Direction.DESC : sortDirections[column] === Direction.NONE ? 
+      direction : Direction.ASC ;
 
     // console.log(`Sorting ${column} header ib the ${orderCtrl} direction`);    
 
     const sortComparator = (a: IWidget , b: IWidget): number => {
       return orderCtrl === Direction.DESC ? 
-        b[column].localeCompare(a[column], undefined, {numeric: column === COLUMN_NAME ? false : true}) :
-        a[column].localeCompare(b[column], undefined, {numeric: column === COLUMN_NAME ? false : true});
+        b[column].localeCompare(a[column], undefined, 
+          {numeric: column === COLUMN_NAME ? false : true}) :
+        a[column].localeCompare(b[column], undefined, 
+          {numeric: column === COLUMN_NAME ? false : true});
     }
 
     const orderedData = parts.sort(sortComparator);
@@ -126,7 +139,19 @@ const useWidgetDataService = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return {error, notificationList, parts, partnames, result, showNotification, status, clearFilter, performFilter, setShowNotification, sortWidgetsData };
+  return {
+    error, 
+    notificationList, 
+    parts, 
+    partnames, 
+    result, 
+    showNotification, 
+    status, 
+    clearFilter, 
+    performFilter, 
+    setShowNotification, 
+    sortWidgetsData 
+  };
 };
 
-export {useWidgetDataService};
+export default useWidgetDataService;

@@ -1,20 +1,17 @@
 import React from 'react';
 
 import Autocomplete from '../autocomplete';
+import {IHeaderForm} from '../../common/types';
 import {useLocalStorageState} from '../../common/hooks';
 
 import './header-form.css';
 
-const HeaderForm: React.FunctionComponent<any> = (
-  { 
-    data = [],
-    onSelect, 
-  }: 
-  { 
-    data: any[], 
-    onSelect: (srch: string) => void, //React.Dispatch<React.SetStateAction<{}>>
-  }
-) => {
+const HeaderForm: React.FunctionComponent<IHeaderForm> = (
+    { 
+      data = [],
+      onSelect, 
+    }
+  ) => {
 
   const [restocklvl, setRestockLevel] = useLocalStorageState('restocklevel', 10);
 

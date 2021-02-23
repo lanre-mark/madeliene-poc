@@ -1,12 +1,12 @@
 import React, { useState } from "react";
+
+import {IAutoComplete} from '../../common/types'
+
 import "./style.css";
 
-const Autocomplete: React.FunctionComponent<any> = (
+const Autocomplete: React.FunctionComponent<IAutoComplete> = (
   { data = [], 
     onSelect 
-  }: 
-  { data: string[], 
-    onSelect: (srch: string) => void //React.Dispatch<React.SetStateAction<{}>>
   }) => {
   const [userInput, setUserInput] = useState<string>("");
   const [filtered, setFiltered] = useState<string[]>([]);

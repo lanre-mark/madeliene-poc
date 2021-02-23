@@ -1,8 +1,8 @@
 import React from 'react'
-import {COLUMN_NAME, COLUMN_PRICE, COLUMN_INSTOCK, SortColumn} from '../../common/types';
+import {COLUMN_NAME, COLUMN_PRICE, COLUMN_INSTOCK, ITableHeader, SortColumn} from '../../common/types';
 import {assertUnreachableTypes} from '../../common/helper';
 
-const TableHeader: React.FunctionComponent<any> = ({sortaction}) => {
+const TableHeader: React.FunctionComponent<ITableHeader> = ({sortaction}) => {
 
   const onHeaderClick = (e: React.MouseEvent<HTMLTableHeaderCellElement, MouseEvent>, type: SortColumn) => {
     switch (type) {
@@ -23,10 +23,10 @@ const TableHeader: React.FunctionComponent<any> = ({sortaction}) => {
   return  (
     <thead>
       <tr>
-        <th>ID</th>
-        <th onClick={(e) => onHeaderClick(e, COLUMN_NAME)}>Name</th>
-        <th onClick={(e) => onHeaderClick(e, COLUMN_PRICE)}>Price</th>
-        <th onClick={(e) => onHeaderClick(e, COLUMN_INSTOCK)}>Stock</th>
+        <th>S/N</th>
+        <th style={{cursor: 'pointer'}} onClick={(e) => onHeaderClick(e, COLUMN_NAME)}>Name</th>
+        <th style={{cursor: 'pointer'}} onClick={(e) => onHeaderClick(e, COLUMN_PRICE)}>Price</th>
+        <th style={{cursor: 'pointer'}} onClick={(e) => onHeaderClick(e, COLUMN_INSTOCK)}>Stock</th>
       </tr>
     </thead>
   )

@@ -1,9 +1,9 @@
 import React from 'react'
 
-import {IWidget} from '../../common/types';
+import {ITableRows, IWidget, IWidgetTableRow} from '../../common/types';
 import {ToNumberPresentation} from '../../common/helper';
 
-const WidgetTableRow: React.FunctionComponent<any> = ({widget, ndx}: {widget: IWidget, ndx: number}): any => {
+const WidgetTableRow: React.FunctionComponent<IWidgetTableRow> = ({widget, ndx}): any => {
   return (
     <tr
         key={widget.id}
@@ -16,7 +16,7 @@ const WidgetTableRow: React.FunctionComponent<any> = ({widget, ndx}: {widget: IW
   )
 }
 
-const TableRows: React.FunctionComponent<any> = ({widgets}: {widgets: IWidget[]}) => {
+const TableRows: React.FunctionComponent<ITableRows> = ({widgets}) => {
   return (
     <tbody>
       {widgets.map((widget: IWidget, index: number) => WidgetTableRow({widget, ndx: index})) }

@@ -10,4 +10,4 @@ const ToNumberPresentation = (numValue: number | string, format: NumberFormats =
   return format === 'N' ? typeof numValue === 'number' ? numValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : numValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',') : typeof numValue === 'number' ? numValue.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,") : Number(numValue).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
 };
 
-export {ToNumberPresentation}
+export default ToNumberPresentation

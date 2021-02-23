@@ -1,12 +1,18 @@
+/**
+ * adapted from https://github.com/uzochukwueddie/react-toast.git
+ */
+
 import React, { useState, useEffect } from 'react';
+import { IToast } from '../../common/types';
 import './toast.css';
 
-const Toast: React.FunctionComponent<any> = ({ notificationList, notifyState, autoDelete = true, dismissTime = 5000 }: 
-  {
-    notificationList: any[],
-    notifyState: React.Dispatch<React.SetStateAction<{}>>,
-    autoDelete: boolean,
-    dismissTime: number}
+const Toast: React.FunctionComponent<IToast> = (
+    {   
+        notificationList, 
+        notifyState, 
+        autoDelete = true, 
+        dismissTime = 5000 
+    }
   ) => {
 
     const [list, setList] = useState(notificationList);
@@ -15,7 +21,7 @@ const Toast: React.FunctionComponent<any> = ({ notificationList, notifyState, au
         setList([...notificationList]);
     }, [notificationList]);
 
-    const deleteToast = React.useCallback((id: number): void => {
+    const deleteToast = React.useCallback((id: string): void => {
       const listItemIndex = list.findIndex(e => e.id === id);
       const toastListItem = notificationList.findIndex(e => e.id === id);
       list.splice(listItemIndex, 1);
@@ -52,7 +58,7 @@ const Toast: React.FunctionComponent<any> = ({ notificationList, notifyState, au
                                 X
                             </button>
                             <div className="notification-image">
-                                <toast.icon className="img"/>
+                                <toast.icon />
                             </div>
                             <div>
                                 <p className="notification-title">{toast.title}</p>
