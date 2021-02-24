@@ -29,6 +29,7 @@ const HeaderForm: React.FunctionComponent<IHeaderForm> = (
               type="number"
               className="restocklevel"
               name="restocklevel"
+              data-testid="numeric-input"
               value={restocklvl}
               min={'1'}
               max={'1000'}

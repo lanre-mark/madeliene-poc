@@ -8,7 +8,7 @@ describe("renders without crashing", () => {
   describe("static title check", () => {
     it("display titles", () => {
       const {container} = render(<HeaderForm data={testData.map(tst => tst.name)} onSelect={handleSelect}/>);
-      expect(container.querySelector("h3")).toHaveTextContent("Monique Widgets - Staging!");
+      expect(container.querySelector("h3")).toHaveTextContent("Monique Widgets");
 
       const restockText = screen.getByText(/restock levels:/i);
       expect(restockText).toBeInTheDocument();

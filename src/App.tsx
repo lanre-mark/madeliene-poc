@@ -10,9 +10,10 @@ import {useWidgetDataService} from './common/hooks';
 import "./App.css";
 
 
-function App() {
+const App: React.FunctionComponent<any> = () => {
 
   const {
+    error,
     notificationList,
     parts, 
     partnames, 
@@ -28,8 +29,13 @@ function App() {
     srch === '' ? clearFilter() : performFilter(srch);
   }
 
+  const throwError = (err: Error | unknown) => {
+    throw err;
+  }
+
   return (
     <div className="App">
+      <HeaderForm data={partnames} onSelect={onAutoSelection}/>
       {status === 'loading' && <div>
         <Loading 
           message={'establishing connection with the server.....'}/>
@@ -37,7 +43,6 @@ function App() {
       }
       {status === 'loaded' && 
         <>
-          <HeaderForm data={partnames} onSelect={onAutoSelection}/>
           <Table widgets={parts} sortaction={sortWidgetsData} 
             notificationList={notificationList} 
             notifystatus={showNotification}
@@ -50,7 +55,7 @@ function App() {
         </>
       }
       {status === 'error' && (
-        <div>Error, the backend moved to the dark side.</div>
+        throwError(error)
       )}
     </div>
   );

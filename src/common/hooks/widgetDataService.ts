@@ -45,6 +45,7 @@ const useWidgetDataService = () => {
 
   // state for active sort direction and columns
   //  initialized to NO direction and 'name' column
+  //  used for icon renderig on table headers
   const [activeSortObjects, setActiveSortObjects] = useState<ActiveSortData>(() => ({
     direction: Direction.NONE,
     column: COLUMN_NAME

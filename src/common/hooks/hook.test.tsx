@@ -12,7 +12,7 @@ describe('exposes the features and functionalities of useWdigetDataService hook'
     expect(hookDataService.current.parts).toEqual([]);
     expect(hookDataService.current.partnames).toEqual([]);
     expect(hookDataService.current.status).toBe('');
-    expect(hookDataService.current.error).toBeUndefined();
+    expect(hookDataService.current.error).toBeUndefined(); // toBeInstanceOf(Function);
 
     expect(hookDataService.current.clearFilter).toBeDefined();
     expect(hookDataService.current.clearFilter).toBeInstanceOf(Function);
