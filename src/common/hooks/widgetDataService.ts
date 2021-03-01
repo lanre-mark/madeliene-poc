@@ -63,7 +63,7 @@ const useWidgetDataService = () => {
       Direction.DESC : sortDirections[column] === Direction.NONE ? 
       direction : Direction.ASC ;
 
-    // console.log(`Sorting ${column} header ib the ${orderCtrl} direction`);    
+    // console.log(`Sorting ${column} header in the ${orderCtrl} direction`);    
 
     setActiveSortObjects((prevState) => ({
       ...prevState,
@@ -80,7 +80,7 @@ const useWidgetDataService = () => {
     }
 
     const orderedData = parts.sort(sortComparator);
-
+    // console.log('Sorted Data ::', orderedData);
     setParts(orderedData);
 
     setSortDirections((prevState) => ({

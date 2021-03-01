@@ -1,5 +1,6 @@
 import React from 'react';
-import { cleanup, getByTestId, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, getByTestId, render, screen } from "@testing-library/react";
+import userEvent from '@testing-library/user-event';
 import HeaderForm from './header-form';
 
 import {handleSelect, testData} from '../../common/helper/test-data';
@@ -14,7 +15,16 @@ describe("renders without crashing", () => {
       expect(restockText).toBeInTheDocument();
     });
 
-    it("set a initial value for restock level input", () => {
+    it("change value of restock level input", () => {
+
+      const {container} = render(<HeaderForm data={testData.map(tst => tst.name)} onSelect={handleSelect}/>);
+      const input = getByTestId(container, "numeric-input") as HTMLInputElement;
+      userEvent.clear(input);  
+      userEvent.type(input, '12');
+      expect(input.value).toBe('12');
+      fireEvent.keyPress(input, { key: 'ArrowDown' });
+      const newValue = screen.getByTestId('numeric-input') as HTMLInputElement;
+      console.log(newValue.value);
 
     })
   });

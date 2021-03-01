@@ -38,6 +38,7 @@ describe('exposes the features and functionalities of useWdigetDataService hook'
     
     expect(hookDataService.current.serviceResponse.status).toEqual('loaded');
     expect(hookDataService.current.serviceResponse).toHaveProperty('parts');
+
   });
 
   it('confirm parts and partnames state', () => {

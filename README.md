@@ -77,6 +77,16 @@ about what you would like to improve if given more time. Happy coding!
 Collaboration is a big part of the culture at Waybridge and we're very happy to
 answer any questions that you have about the challenge.
 
+# How to Run
+
+To start the project and run with your browser. Run the script command below;
+
+```
+yarn dev:yarn
+```
+
+This will start the server and start the project concurrently.
+
 # My Comments
 
 If I had more time, I could improve on the following;
@@ -86,3 +96,17 @@ If I had more time, I could improve on the following;
 - &#9744; improve user mobile expreience and accessibility options
 
 - &#9744; increase test coverage and include cypress end to end tests
+
+# Improvements
+
+In this challenge, there is improvement for quite a lot;
+
+- there was quite a lot of room for testing. I could do more in testing user interactions in the components and have a main test file that details the way a monique interacts with the application itself using mock data.
+
+- there is room to test my types using [dtslint](https://www.npmjs.com/package/dtslint) library especially on runtime data though I added an assertion type checking in the data api module.
+
+- for state management, other options asides the custom data widget service hook include using context api, using state hooks passed down as props from the app component to all the child components, etc. Other state management libraries such as recoil, flux, redux, xstate, jotai, etc would be an over kill for this project.
+
+- the custom widget data service contained some other functionalities that could have been abstracted into separate modules for separation of concerns. This would have helped to add test cases for those functionalities with injected dependencies.
+
+- one major challenge of the custom widget service hook is that it's doing a lot. while that isn't a problem in an application as straight forwrd as this, the data is tightly coupled into the hook and there is no way to add the data as a dependency outside the module without a hack.

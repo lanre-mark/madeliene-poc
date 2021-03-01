@@ -6,7 +6,12 @@ import { requestData } from '../common/api';
  * @param arg each row of the data from api
  */
 function isIWidget(arg: any): arg is IWidget {
-  return (typeof arg.id === 'number' && typeof arg.name === 'string' && typeof arg.price ==='string' && typeof arg.instock === 'string' )
+  return (
+    typeof arg.id === 'number' && 
+    typeof arg.name === 'string' && 
+    typeof arg.price ==='string' && 
+    typeof arg.instock === 'string' 
+  )
 }
 
 /**
@@ -18,7 +23,12 @@ function isIWidget(arg: any): arg is IWidget {
  * @param datadesc description of data object
  * @param excludeOnError : exclude objects that fail type def or exclude entire data objects
  */
-function assertDataIsTypedArray<T>(arg: any, check: (val: any) => val is T, datadesc: string, excludeOnError: boolean = false): asserts arg is T[] {
+function assertDataIsTypedArray<T>(
+    arg: any, 
+    check: (val: any) => val is T, 
+    datadesc: string, 
+    excludeOnError: boolean = false
+  ): asserts arg is T[] {
   // paramter type validation
   if (!Array.isArray(arg)) throw new Error(`Not an array: ${JSON.stringify(arg)}`)
   // paramter data content validation
