@@ -11,7 +11,7 @@ describe('exposes the features and functionalities of useWdigetDataService hook'
     expect(hookDataService.current.notificationList).toEqual([]);
     expect(hookDataService.current.parts).toEqual([]);
     expect(hookDataService.current.partnames).toEqual([]);
-    expect(hookDataService.current.status).toBe('');
+    expect(hookDataService.current.status).toBe('loading');
     expect(hookDataService.current.error).toBeUndefined(); // toBeInstanceOf(Function);
 
     expect(hookDataService.current.clearFilter).toBeDefined();

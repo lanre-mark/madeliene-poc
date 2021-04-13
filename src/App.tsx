@@ -5,6 +5,8 @@ import Loading from './components/Loading';
 import Table from './components/table';
 import Toast from './components/toast'
 
+// import {ErrorBoundary, ErrorFallback} from './components/error-boundary';
+
 import {useWidgetDataService} from './common/hooks';
 
 import "./App.css";
@@ -36,6 +38,10 @@ const App: React.FunctionComponent<any> = () => {
   return (
     <div className="App">
       <HeaderForm data={partnames} onSelect={onAutoSelection}/>
+      {/* <Table widgets={parts} sortaction={sortWidgetsData} 
+            notificationList={notificationList} 
+            notifystatus={showNotification}
+          /> */}
       {status === 'loading' && <div>
         <Loading 
           message={'establishing connection with the server.....'}/>

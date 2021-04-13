@@ -51,7 +51,7 @@ export async function getAllData() {
   if (typeof cachedWidgetData === 'undefined')
     cachedWidgetData = requestData().then(rawData => {
       // this may perform a side effect if there is any row of data that is invalidated
-      rawData = assertDataIsTypedArray(rawData, isIWidget, 'Widget', true);
+      rawData = assertDataIsTypedArray(rawData, isIWidget, 'Widget', true) ;
       return rawData;
     });
 

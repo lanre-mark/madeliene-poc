@@ -26,7 +26,7 @@ const useWidgetDataService = () => {
   });
 
   // state variables for status of service
-  const [status, setStatus] = useState<string>(() => '');
+  const [status, setStatus] = useState<string>(() => 'loading');
   const [error, setError] = useState<Error | undefined>(() => undefined);
   
   // parts state for list of IWidget types
@@ -176,6 +176,7 @@ const useWidgetDataService = () => {
     setParts,
     setServiceResponse,
     setShowNotification, 
+    setStatus,
     sortWidgetsData 
   };
 };

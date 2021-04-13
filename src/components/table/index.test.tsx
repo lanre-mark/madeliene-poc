@@ -8,7 +8,6 @@ import Table from './index';
 import {testData, notifyData} from '../../common/helper/test-data';
 import useWidgetDataService from '../../common/hooks/widgetDataService';
 
-
 describe('renders table without crashing', () => {
   it("renders table headers", () => {
     const { getByText } = render(

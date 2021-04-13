@@ -10,8 +10,8 @@ const Toast: React.FunctionComponent<IToast> = (
     {   
         notificationList, 
         notifyState, 
-        autoDelete = true, 
-        dismissTime = 2500 
+        autoDelete = false, 
+        dismissTime = 5000 
     }
   ) => {
 
