@@ -21,7 +21,7 @@ const HeaderForm: React.FunctionComponent<IHeaderForm> = (
 
   return (
     <div className="header-component">
-      <h3>Monique Widgets!</h3>  
+      <h3>Madeliene Widgets!</h3>  
       <form>
         <label htmlFor="restocklevel">
           Restock Levels:

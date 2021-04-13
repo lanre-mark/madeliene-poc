@@ -56,7 +56,7 @@ const useLocalStorageState = <T>(
       // We dispatch a custom event so every useLocalStorage hook are notified
       // other modules using localStorage hook needs to be notified of changes
       //  to any key they are subscribed to
-      window.dispatchEvent(new Event('monique-store'));
+      window.dispatchEvent(new Event('madeliene-store'));
 
     } catch (error) {
       console.warn(`Error setting localStorage key “${key}”:`, error);
@@ -82,9 +82,9 @@ const useLocalStorageState = <T>(
       setStoredValue(readStoredValue());
     }
     // this is a custom event, triggered in writeValueToLocalStorage
-    window.addEventListener('monique-store', handleStorageChange);
+    window.addEventListener('madeliene-store', handleStorageChange);
     return () => {
-      window.removeEventListener('monique-store', handleStorageChange);
+      window.removeEventListener('madeliene-store', handleStorageChange);
     }
   }, [readStoredValue]);
 

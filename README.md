@@ -60,7 +60,7 @@ Check [json-server](https://github.com/typicode/json-server) for more informatio
 
 There is no hard time limit for this quick coding challenge. However, I believe that
 4-5 hours is sufficient to satisfy
-[Madeliene's use cases](#use-cases-monique-should-be-able-to) for the tool. While
+[Madeliene's use cases](#use-cases-Madeliene-should-be-able-to) for the tool. While
 we appreciate all the effort put into the challenge, we also do not want to take
 up too much of your time. Our advice is to focus on making sure that the
 application works properly & has some tests, and then moving on to crush the other
@@ -89,7 +89,7 @@ This will start the server and start the project concurrently.
 
 There is improvement for quite a lot;
 
-- there was quite a lot of room for testing. I could do more in testing user interactions in the components and have a main test file that details the way a monique interacts with the application itself using mock data.
+- there was quite a lot of room for testing. I could do more in testing user interactions in the components and have a main test file that details the way a madeliene interacts with the application itself using mock data.
 
 - there is room to test my types using [dtslint](https://www.npmjs.com/package/dtslint) library especially on runtime data though I added an assertion type checking in the data api module.
 
