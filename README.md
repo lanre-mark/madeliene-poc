@@ -1,25 +1,25 @@
-# Waybridge frontend coding challenge
+# Quick coding challenge
 
-Welcome to the Waybridge frontend coding challenge! Please read the following instructions carefully.
+Welcome to the quick coding challenge! Please read the following instructions carefully.
 
 # The Story
 
-Monique runs a very successful manufacturing business making widgets. These
-widgets are so popular that Monique has a hard time keeping up with demand.
-Monique inherited a tool that displays information about her inventory, but she
+Madeliene runs a very successful manufacturing business making widgets. These
+widgets are so popular that Madeliene has a hard time keeping up with demand.
+Madeliene inherited a tool that displays information about her inventory, but she
 does not find it very helpful. Your job is to build a better tool or improve
-upon the existing app. Monique will use this tool to search through her
+upon the existing app. Madeliene will use this tool to search through her
 inventory, find out of stock items, and find items that are low on inventory so
 she can order replacements.
 
-# Use cases - Monique should be able to:
+# Use cases - Madeliene should be able to:
 
 - See all of her inventory
 - Search through her inventory
 - Be notified of items out of stock
 - Be notified of items that are low on stock
 
-# Evaluation criteria
+# Evaluation
 
 ## Technology requirements
 
@@ -27,7 +27,7 @@ she can order replacements.
 can use any libraries, task runners and build processors. ES6 and TypeScript are
 highly encouraged.
 
-## Grading requirements
+## Target requirements
 
 - Is the code easy to follow and reuse?
 - Does the code demonstrate an understanding of React best practices?
@@ -41,12 +41,7 @@ highly encouraged.
 # Getting started
 
 - Clone this repository.
-- Complete your project as described above within your local repository.
-
-# Submission
-
-- Create a git bundle: `git bundle create your_name.bundle --all`
-- Email the bundle file to your point of contact.
+- Complete your project as described above.
 
 # How to run the API server
 
@@ -63,19 +58,14 @@ Check [json-server](https://github.com/typicode/json-server) for more informatio
 
 # Time limit
 
-There is no hard time limit for this coding challenge. However, we believe that
+There is no hard time limit for this quick coding challenge. However, I believe that
 4-5 hours is sufficient to satisfy
-[Monique's use cases](#use-cases-monique-should-be-able-to) for the tool. While
+[Madeliene's use cases](#use-cases-monique-should-be-able-to) for the tool. While
 we appreciate all the effort put into the challenge, we also do not want to take
 up too much of your time. Our advice is to focus on making sure that the
 application works properly & has some tests, and then moving on to crush the other
-[Grading requirements](#grading-requirements). And please include some comments
+[Target requirements](#grading-requirements). And please include some comments
 about what you would like to improve if given more time. Happy coding!
-
-# Questions
-
-Collaboration is a big part of the culture at Waybridge and we're very happy to
-answer any questions that you have about the challenge.
 
 # How to Run
 
@@ -87,9 +77,7 @@ yarn dev:yarn
 
 This will start the server and start the project concurrently.
 
-# My Comments
-
-If I had more time, I could improve on the following;
+# Implementational Improvements
 
 - &#9744; make the TableHeader component static (so it's not affected by the scroolbar)
 
@@ -97,15 +85,15 @@ If I had more time, I could improve on the following;
 
 - &#9744; increase test coverage and include cypress end to end tests
 
-# Improvements
+# Conceptual Improvements
 
-In this challenge, there is improvement for quite a lot;
+There is improvement for quite a lot;
 
 - there was quite a lot of room for testing. I could do more in testing user interactions in the components and have a main test file that details the way a monique interacts with the application itself using mock data.
 
 - there is room to test my types using [dtslint](https://www.npmjs.com/package/dtslint) library especially on runtime data though I added an assertion type checking in the data api module.
 
-- for state management, other options asides the custom data widget service hook include using context api, using state hooks passed down as props from the app component to all the child components, etc. Other state management libraries such as recoil, flux, redux, xstate, jotai, etc would be an over kill for this project.
+- for state management, other options asides the custom data widget service hook include using context api, using state hooks passed down as props from the app component to all the child components like what I currently have using the custom data widger service hook, etc. Other state management libraries such as recoil, flux, redux, xstate, jotai, etc would be an over kill for this project.
 
 - the custom widget data service contained some other functionalities that could have been abstracted into separate modules for separation of concerns. This would have helped to add test cases for those functionalities with injected dependencies.
 
