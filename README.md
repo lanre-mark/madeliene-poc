@@ -64,7 +64,7 @@ There is no hard time limit for this quick coding challenge. However, I believe 
 we appreciate all the effort put into the challenge, we also do not want to take
 up too much of your time. Our advice is to focus on making sure that the
 application works properly & has some tests, and then moving on to crush the other
-[Target requirements](#grading-requirements). And please include some comments
+[Target requirements](#target-requirements). And please include some comments
 about what you would like to improve if given more time. Happy coding!
 
 # How to Run
